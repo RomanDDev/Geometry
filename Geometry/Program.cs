@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Geometry.ApplicationLayer;
 
 namespace Geometry
 {
@@ -17,7 +15,9 @@ namespace Geometry
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DrawingForm());
+            var form = new DrawingForm();
+            var drawingPresenter = new DrawingPresenter(form);
+            Application.Run(form);
         }
     }
 }
