@@ -121,13 +121,19 @@
   <data name="draw16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\2202272_compose_draw_edit_pencil_write_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="MissingShapeErrorMessage" xml:space="preserve">
+    <value>Current shape is not a part of editor shapes collection.</value>
+  </data>
   <data name="move16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\2561476_move_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NoShapeDuplicatesAllowedMessage" xml:space="preserve">
+    <value>Collection already contains the shape you are trying to add. No duplicates allowed.</value>
   </data>
   <data name="select16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\64632_select_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="UnexpectedEditorModeErrorMessage" xml:space="preserve">
-    <value>Unexpected editor mode</value>
+    <value>Unexpected editor mode.</value>
   </data>
 </root>

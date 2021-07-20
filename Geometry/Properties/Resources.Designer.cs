@@ -71,12 +71,30 @@ namespace Geometry.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current shape is not a part of editor shapes collection..
+        /// </summary>
+        internal static string MissingShapeErrorMessage {
+            get {
+                return ResourceManager.GetString("MissingShapeErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap move16 {
             get {
                 object obj = ResourceManager.GetObject("move16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collection already contains the shape you are trying to add. No duplicates allowed..
+        /// </summary>
+        internal static string NoShapeDuplicatesAllowedMessage {
+            get {
+                return ResourceManager.GetString("NoShapeDuplicatesAllowedMessage", resourceCulture);
             }
         }
         
@@ -91,7 +109,7 @@ namespace Geometry.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unexpected editor mode.
+        ///   Looks up a localized string similar to Unexpected editor mode..
         /// </summary>
         internal static string UnexpectedEditorModeErrorMessage {
             get {
