@@ -10,5 +10,6 @@ namespace Geometry.PresentationLayer.Interfaces
         void Show();
         void Close();
         event PaintEventHandler Paint;
+        void Invalidate();
     }
 }

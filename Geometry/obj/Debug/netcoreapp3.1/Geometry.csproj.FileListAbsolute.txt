@@ -13,3 +13,4 @@ C:\Users\asezm\source\repos\Geometry\Geometry\obj\Debug\netcoreapp3.1\Geometry.d
 C:\Users\asezm\source\repos\Geometry\Geometry\obj\Debug\netcoreapp3.1\Geometry.pdb
 C:\Users\asezm\source\repos\Geometry\Geometry\obj\Debug\netcoreapp3.1\Geometry.genruntimeconfig.cache
 C:\Users\asezm\source\repos\Geometry\Geometry\obj\Debug\netcoreapp3.1\Geometry.Properties.Resources.resources
+C:\Users\asezm\source\repos\Geometry\Geometry\obj\Debug\netcoreapp3.1\Geometry.csproj.AssemblyReference.cache

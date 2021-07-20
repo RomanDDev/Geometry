@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Geometry.ApplicationLayer.Enums;
+using Geometry.ApplicationLayer.EventArgs;
 using Geometry.PresentationLayer.Interfaces;
 using Geometry.Properties;
 
@@ -14,9 +15,9 @@ namespace Geometry
         }
 
         #region IEditorView Implementation
-        public event EventHandler<EventArgs> OnSelectMode;
-        public event EventHandler<EventArgs> OnMoveMode;
-        public event EventHandler<EventArgs> OnDrawMode;
+
+        public event EventHandler<EditorModeChangedEventArgs> OnEditorModeChanged;
+        public event EventHandler<BrushShapeChangedEventArgs> OnEditorBrushShapeChanged;
 
         public void SetMode(EditorModes mode)
         {
@@ -37,22 +38,47 @@ namespace Geometry
         }
         #endregion
 
-        private void selectButton_CheckedChanged(object sender, EventArgs e)
+        private void SelectButton_CheckedChanged(object sender, EventArgs e)
         {
             if (!selectButton.Checked) return;
-            OnSelectMode?.Invoke(this, EventArgs.Empty);
+            OnEditorModeChanged?.Invoke(this, new EditorModeChangedEventArgs(EditorModes.Selection));
         }
 
-        private void drawButton_CheckedChanged(object sender, EventArgs e)
+        private void DrawButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (!drawButton.Checked) return;
-            OnDrawMode?.Invoke(this, EventArgs.Empty);
+            if (!drawButton.Checked)
+            {
+                shapesGroupBox.Visible = false;
+                return;
+            }
+            shapesGroupBox.Visible = true;
+            OnEditorModeChanged?.Invoke(this, new EditorModeChangedEventArgs(EditorModes.Drawing));
         }
 
-        private void moveButton_CheckedChanged(object sender, EventArgs e)
+        private void MoveButton_CheckedChanged(object sender, EventArgs e)
         {
             if (!moveButton.Checked) return;
-            OnMoveMode?.Invoke(this, EventArgs.Empty);
+            OnEditorModeChanged?.Invoke(this, new EditorModeChangedEventArgs(EditorModes.Movement));
+        }
+
+        private void QuadrangleRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            OnEditorBrushShapeChanged?.Invoke(this, new BrushShapeChangedEventArgs(BrushShapes.Quadrangle));
+        }
+
+        private void TriangleRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            OnEditorBrushShapeChanged?.Invoke(this, new BrushShapeChangedEventArgs(BrushShapes.Triangle));
+        }
+
+        private void EllipseRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            OnEditorBrushShapeChanged?.Invoke(this, new BrushShapeChangedEventArgs(BrushShapes.Ellipse));
+        }
+
+        private void RhombusRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            OnEditorBrushShapeChanged?.Invoke(this, new BrushShapeChangedEventArgs(BrushShapes.Rhombus));
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Geometry.DomainLayer.Models.BaseShapes
 {
     public abstract class InteractiveShape : GeometryShape
     {
-        private const int InteractivePointWightAndHeight = 2;
+        private const int InteractivePointWightAndHeight = 5;
         private static readonly Color PointFillColor = Color.Red;
 
         protected IEnumerable<Point> InteractivePoints { get; set; }
@@ -18,11 +18,11 @@ namespace Geometry.DomainLayer.Models.BaseShapes
         public sealed override void Move(int dx, int dy)
         {
             base.Move(dx, dy);
-            UpdateInteractivePoints();
         }
 
-        public sealed override void DrawInteractivePoints(Graphics graphics)
+        protected sealed override void DrawInteractivePoints(Graphics graphics)
         {
+            UpdateInteractivePoints();
             var brush = new SolidBrush(PointFillColor);
             var size = InteractivePointWightAndHeight;
             foreach (var interactivePoint in InteractivePoints)

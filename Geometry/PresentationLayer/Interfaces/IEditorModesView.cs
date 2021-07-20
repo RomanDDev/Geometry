@@ -1,24 +1,20 @@
 ﻿using System;
 using Geometry.ApplicationLayer.Enums;
+using Geometry.ApplicationLayer.EventArgs;
 
 namespace Geometry.PresentationLayer.Interfaces
 {
     public interface IEditorModesView
     {
         /// <summary>
-        /// Fires on switching mode to selection
+        /// Fires on switching editor tool
         /// </summary>
-        event EventHandler<System.EventArgs> OnSelectMode;
+        event EventHandler<EditorModeChangedEventArgs> OnEditorModeChanged;
 
         /// <summary>
-        /// Fires on switching mode to shape movement
+        /// Fires on switching brush shape
         /// </summary>
-        event EventHandler<System.EventArgs> OnMoveMode;
-
-        /// <summary>
-        /// Fires on switching mode to shape drawing
-        /// </summary>
-        event EventHandler<System.EventArgs> OnDrawMode;
+        event EventHandler<BrushShapeChangedEventArgs> OnEditorBrushShapeChanged;
 
         /// <summary>
         /// Sets the editor mode of view

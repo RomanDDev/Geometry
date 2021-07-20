@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Geometry.ApplicationLayer.Enums;
+using Geometry.ApplicationLayer.EventArgs;
 using Geometry.ApplicationLayer.Interfaces;
+using Geometry.ApplicationLayer.Tools;
 using Geometry.DomainLayer.Interfaces;
 using Geometry.PresentationLayer.Interfaces;
 
@@ -21,6 +24,7 @@ namespace Geometry.ApplicationLayer.Presenters
             _shapesRepository = shapesRepository;
             _toolDictionary = toolDictionary;
             SubscribeToInputEvents();
+            _view.SetMode(EditorModes.Drawing);
         }
 
         /// <summary>
@@ -43,9 +47,8 @@ namespace Geometry.ApplicationLayer.Presenters
             _view.MouseMove += ViewOnMouseMove;
             _view.MouseUp += ViewOnMouseUp;
             _view.KeyPress += ViewOnKeyPress;
-            _view.OnSelectMode += View_OnSelectMode;
-            _view.OnMoveMode += View_OnMoveMode;
-            _view.OnDrawMode += View_OnDrawMode;
+            _view.OnEditorModeChanged += View_OnEditorModeChanged;
+            _view.OnEditorBrushShapeChanged += ViewOnOnEditorBrushShapeChanged;
             _view.Paint += View_Paint;
         }
 
@@ -55,9 +58,8 @@ namespace Geometry.ApplicationLayer.Presenters
             _view.MouseMove += ViewOnMouseMove;
             _view.MouseUp += ViewOnMouseUp;
             _view.KeyPress += ViewOnKeyPress;
-            _view.OnSelectMode -= View_OnSelectMode;
-            _view.OnMoveMode -= View_OnMoveMode;
-            _view.OnDrawMode -= View_OnDrawMode;
+            _view.OnEditorModeChanged -= View_OnEditorModeChanged;
+            _view.OnEditorBrushShapeChanged -= ViewOnOnEditorBrushShapeChanged;
             _view.Paint -= View_Paint;
         }
 
@@ -70,6 +72,7 @@ namespace Geometry.ApplicationLayer.Presenters
         private void ViewOnMouseUp(object sender, MouseEventArgs e)
         {
             _currentTool?.HandleMouseUp(e);
+            _view.Invalidate();
         }
 
         private void ViewOnMouseMove(object sender, MouseEventArgs e)
@@ -82,24 +85,6 @@ namespace Geometry.ApplicationLayer.Presenters
             _currentTool?.HandleMouseDown(e);
         }
 
-        //Current editor tool depends on selected view mode
-        private void View_OnDrawMode(object sender, EventArgs e)
-        {
-            UpdateCurrentTool(_toolDictionary[EditorModes.Drawing]);
-        }
-
-        private void View_OnMoveMode(object sender, EventArgs e)
-        {
-            UpdateCurrentTool(_toolDictionary[EditorModes.Movement]);
-        }
-
-        private void View_OnSelectMode(object sender, EventArgs e)
-        {
-            UpdateCurrentTool(_toolDictionary[EditorModes.Selection]);
-        }
-
-        #endregion
-
         /// <summary>
         /// View paint event handler
         /// </summary>
@@ -107,8 +92,25 @@ namespace Geometry.ApplicationLayer.Presenters
         /// <param name="e">Paint event args</param>
         private void View_Paint(object sender, PaintEventArgs e)
         {
-            foreach (var geometryShape in _shapesRepository.GetAllShapes())
+            foreach (var geometryShape in _shapesRepository.GetAllShapes().OrderBy(item => item.ZIndex))
                 geometryShape.Draw(e.Graphics);
+        }
+
+        /// <summary>
+        /// Current editor tool depends on selected view mode
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void View_OnEditorModeChanged(object sender, EditorModeChangedEventArgs e)
+        {
+            UpdateCurrentTool(_toolDictionary[e.Mode]);
+        }
+
+        private void ViewOnOnEditorBrushShapeChanged(object sender, BrushShapeChangedEventArgs e)
+        {
+            if (!(_currentTool is DrawTool tool))
+                throw new InvalidOperationException();
+            tool.BrushShape = e.Shape;
         }
 
         /// <summary>
@@ -118,5 +120,7 @@ namespace Geometry.ApplicationLayer.Presenters
         {
             UnsubscribeFromInputEvents();
         }
+
+        #endregion
     }
 }

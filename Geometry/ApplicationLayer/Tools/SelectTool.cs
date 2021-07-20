@@ -1,38 +1,28 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using Geometry.ApplicationLayer.Interfaces;
+﻿using System.Drawing;
+using System.Linq;
+using Geometry.DomainLayer.Interfaces;
 
 namespace Geometry.ApplicationLayer.Tools
 {
     /// <summary>
     /// Tool for selecting shapes
     /// </summary>
-    public class SelectTool : IEditorTool
+    public class SelectTool : BaseTool
     {
-        public void HandleMouseUp(MouseEventArgs args)
+        public SelectTool(IShapeRepository shapeRepository):base(shapeRepository)
         {
-            throw new NotImplementedException();
         }
 
-        public void HandleMouseDown(MouseEventArgs args)
+        protected override void HandleMouseUp(Rectangle selectionRectangle)
         {
-            throw new NotImplementedException();
+            foreach (var geometryShape in ShapeRepository.GetAllShapes().Where(shape => shape.IntersectsRectangle(selectionRectangle)))
+                geometryShape.Select();
         }
 
-        public void HandleMouseMove(MouseEventArgs args)
+        protected override void HandleMouseDown(Point? startMousePoint)
         {
-            throw new NotImplementedException();
-        }
-
-        public void HandleKeyPress(KeyPressEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Reset()
-        {
-            throw new NotImplementedException();
+            foreach (var geometryShape in ShapeRepository.GetAllShapes())
+                geometryShape.Deselect();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Geometry.DomainLayer.Models.BaseShapes
         private readonly int _zIndex;
         private readonly Color _backColor;
         private readonly Color _borderColor;
+        protected static readonly Color SelectedColor = Color.Blue;
 
         /// <summary>
         /// Order of elements. 
@@ -34,12 +35,15 @@ namespace Geometry.DomainLayer.Models.BaseShapes
         /// </summary>
         public Rectangle ContainerRectangle => _containerRectangle;
 
+        public bool Selected { get; set; }
+
         protected GeometryShape(int zIndex, Color backColor, Color borderColor, Rectangle containerRectangle)
         {
             _zIndex = zIndex;
             _backColor = backColor;
             _borderColor = borderColor;
             _containerRectangle = containerRectangle;
+            Selected = false;
         }
 
         /// <summary>
@@ -90,26 +94,26 @@ namespace Geometry.DomainLayer.Models.BaseShapes
         /// Draws the shapes border using the graphics
         /// </summary>
         /// <param name="graphics">Drawing surface</param>
-        public abstract void DrawBorder(Graphics graphics);
+        protected abstract void DrawBorder(Graphics graphics);
 
         /// <summary>
         /// Fills the shape with color using the graphics
         /// </summary>
         /// <param name="graphics">Drawing surface</param>
-        public abstract void FillShape(Graphics graphics);
+        protected abstract void FillShape(Graphics graphics);
 
         /// <summary>
         /// Draws the interactive points of the shape using the graphics if any exists
         /// </summary>
         /// <param name="graphics">Drawing surface</param>
-        public abstract void DrawInteractivePoints(Graphics graphics);
+        protected abstract void DrawInteractivePoints(Graphics graphics);
 
         /// <summary>
         /// Handler for shape selection
         /// </summary>
         public void Select()
         {
-            throw new NotImplementedException();
+            Selected = true;
         }
 
         /// <summary>
@@ -117,7 +121,7 @@ namespace Geometry.DomainLayer.Models.BaseShapes
         /// </summary>
         public void Deselect()
         {
-            throw new NotImplementedException();
+            Selected = false;
         }
 
         /// <summary>
