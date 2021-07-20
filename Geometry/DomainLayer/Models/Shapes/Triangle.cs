@@ -21,7 +21,7 @@ namespace Geometry.DomainLayer.Models.Shapes
 
         protected override void DrawBorder(Graphics graphics)
         {
-            using var pen = new Pen(BorderColor);
+            using var pen = new Pen(BorderColor, 3);
             graphics.DrawPolygon(pen, _points.ToArray());
         }
 
