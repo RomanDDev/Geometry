@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Geometry.ApplicationLayer.Interfaces;
 
@@ -25,6 +26,11 @@ namespace Geometry.ApplicationLayer.Tools
         }
 
         public void HandleKeyPress(KeyPressEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Reset()
         {
             throw new NotImplementedException();
         }

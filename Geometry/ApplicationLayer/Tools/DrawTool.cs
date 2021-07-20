@@ -27,5 +27,10 @@ namespace Geometry.ApplicationLayer.Tools
         {
             throw new System.NotImplementedException();
         }
+
+        public void Reset()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

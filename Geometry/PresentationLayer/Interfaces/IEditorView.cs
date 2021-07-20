@@ -1,4 +1,6 @@
-﻿namespace Geometry.PresentationLayer.Interfaces
+﻿using System.Windows.Forms;
+
+namespace Geometry.PresentationLayer.Interfaces
 {
     /// <summary>
     /// Main interface of winforms view
@@ -7,5 +9,6 @@
     {
         void Show();
         void Close();
+        event PaintEventHandler Paint;
     }
 }

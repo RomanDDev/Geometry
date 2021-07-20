@@ -11,5 +11,6 @@ namespace Geometry.ApplicationLayer.Interfaces
         void HandleMouseDown(MouseEventArgs args);
         void HandleMouseMove(MouseEventArgs args);
         void HandleKeyPress(KeyPressEventArgs args);
+        void Reset();
     }
 }

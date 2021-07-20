@@ -1,6 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Geometry.ApplicationLayer;
+using Geometry.ApplicationLayer.Enums;
+using Geometry.ApplicationLayer.Interfaces;
+using Geometry.ApplicationLayer.Presenters;
+using Geometry.ApplicationLayer.Tools;
+using Geometry.DomainLayer.Repositories;
 
 namespace Geometry
 {
@@ -16,8 +22,18 @@ namespace Geometry
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var form = new DrawingForm();
-            var drawingPresenter = new DrawingPresenter(form);
+            var drawingPresenter = new DrawingPresenter(form, new ShapesRepository(), CreateToolDictionary());
             Application.Run(form);
+        }
+
+        private static Dictionary<EditorModes, IEditorTool> CreateToolDictionary()
+        {
+            return new Dictionary<EditorModes, IEditorTool>
+            {
+                {EditorModes.Drawing, new DrawTool()},
+                {EditorModes.Movement, new MoveTool()},
+                {EditorModes.Selection, new SelectTool()}
+            };
         }
     }
 }
