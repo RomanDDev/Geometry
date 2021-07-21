@@ -29,6 +29,8 @@ namespace Geometry.DomainLayer.Models.BaseShapes
         /// <inheritdoc/>
         protected sealed override void DrawInteractivePoints(Graphics graphics)
         {
+            if (!Selected)
+                return;
             UpdateInteractivePoints();
             var brush = new SolidBrush(PointFillColor);
             var size = InteractivePointWightAndHeight;
