@@ -26,7 +26,12 @@ namespace Geometry.ApplicationLayer.Tools
 
         protected override void HandleMouseUp(Rectangle selectionRectangle)
         {
-            
+            if (selectionRectangle.Width < 2 || selectionRectangle.Height < 2)
+            {
+                Reset();
+                return;
+            }
+
             var zIndex = new Random().Next(10);
             //TODO: Refactor to the factory of shapes
             GeometryShape shape;

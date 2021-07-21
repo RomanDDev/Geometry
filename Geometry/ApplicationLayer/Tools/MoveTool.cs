@@ -29,7 +29,7 @@ namespace Geometry.ApplicationLayer.Tools
 
         public void HandleMouseMove(MouseEventArgs args)
         {
-            throw new NotImplementedException();
+            //do nothing yet
         }
 
         public void HandleKeyPress(KeyPressEventArgs args)

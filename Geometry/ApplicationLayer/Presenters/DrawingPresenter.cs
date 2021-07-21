@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Windows.Forms;
 using Geometry.ApplicationLayer.Enums;
@@ -8,6 +9,7 @@ using Geometry.ApplicationLayer.Interfaces;
 using Geometry.ApplicationLayer.Tools;
 using Geometry.DomainLayer.Interfaces;
 using Geometry.PresentationLayer.Interfaces;
+using Geometry.Properties;
 
 namespace Geometry.ApplicationLayer.Presenters
 {
@@ -75,23 +77,51 @@ namespace Geometry.ApplicationLayer.Presenters
         //Passing view input events to current editor tool handler
         private void ViewOnKeyPress(object sender, KeyPressEventArgs e)
         {
-            _currentTool?.HandleKeyPress(e);
+            try
+            {
+                _currentTool?.HandleKeyPress(e);
+            }
+            catch (Exception ex)
+            {
+                HandleError(ex);
+            }
         }
 
         private void ViewOnMouseUp(object sender, MouseEventArgs e)
         {
-            _currentTool?.HandleMouseUp(e);
-            _view.Invalidate();
+            try
+            {
+                _currentTool?.HandleMouseUp(e);
+                _view.Invalidate();
+            }
+            catch (Exception ex)
+            {
+                HandleError(ex);
+            }
         }
 
         private void ViewOnMouseMove(object sender, MouseEventArgs e)
         {
-            _currentTool?.HandleMouseMove(e);
+            try
+            {
+                _currentTool?.HandleMouseMove(e);
+            }
+            catch (Exception ex)
+            {
+                HandleError(ex);
+            }
         }
 
         private void ViewOnMouseDown(object sender, MouseEventArgs e)
         {
-            _currentTool?.HandleMouseDown(e);
+            try
+            {
+                _currentTool?.HandleMouseDown(e);
+            }
+            catch (Exception ex)
+            {
+                HandleError(ex);
+            }
         }
 
         /// <summary>
@@ -112,7 +142,14 @@ namespace Geometry.ApplicationLayer.Presenters
         /// <param name="e"></param>
         private void View_OnEditorModeChanged(object sender, EditorModeChangedEventArgs e)
         {
-            UpdateCurrentTool(_toolDictionary[e.Mode]);
+            try
+            {
+                UpdateCurrentTool(_toolDictionary[e.Mode]);
+            }
+            catch (Exception ex)
+            {
+                HandleError(ex);
+            }
         }
 
         /// <summary>
@@ -136,5 +173,25 @@ namespace Geometry.ApplicationLayer.Presenters
         }
 
         #endregion
+
+        /// <summary>
+        /// Error handler
+        /// </summary>
+        /// <param name="ex">Exception info</param>
+        private void HandleError(Exception ex)
+        {
+            switch (ex)
+            {
+                case NotImplementedException _:
+                    _view.ShowInformationMessage(Resources.FeatureSubscribtionRestriction, Resources.InformationMessageBoxCaption);
+                    break;
+                case InvalidOperationException _:
+                    _view.ShowInformationMessage(ex.Message, Resources.InformationMessageBoxCaption);
+                    break;
+                default:
+                    _view.ShowErrorMessage(ex);
+                    break;
+            }
+        }
     }
 }

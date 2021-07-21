@@ -81,6 +81,33 @@ namespace Geometry.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An unexpected error occurred.
+        /// </summary>
+        internal static string ErrorMessageBoxCaption {
+            get {
+                return ResourceManager.GetString("ErrorMessageBoxCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This feature isn`t available on your subscription level. Upgrade your subscription in order to get more features..
+        /// </summary>
+        internal static string FeatureSubscribtionRestriction {
+            get {
+                return ResourceManager.GetString("FeatureSubscribtionRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Editor info.
+        /// </summary>
+        internal static string InformationMessageBoxCaption {
+            get {
+                return ResourceManager.GetString("InformationMessageBoxCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current shape is not a part of editor shapes collection..
         /// </summary>
         internal static string MissingShapeErrorMessage {

@@ -151,4 +151,13 @@
   <data name="UnexpectedEditorModeErrorMessage" xml:space="preserve">
     <value>Unexpected editor mode.</value>
   </data>
+  <data name="ErrorMessageBoxCaption" xml:space="preserve">
+    <value>An unexpected error occurred</value>
+  </data>
+  <data name="InformationMessageBoxCaption" xml:space="preserve">
+    <value>Editor info</value>
+  </data>
+  <data name="FeatureSubscribtionRestriction" xml:space="preserve">
+    <value>This feature isn`t available on your subscription level. Upgrade your subscription in order to get more features.</value>
+  </data>
 </root>

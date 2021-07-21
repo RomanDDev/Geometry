@@ -92,5 +92,20 @@ namespace Geometry
         }
 
         #endregion
+
+        #region Messenger implementation
+
+        public void ShowInformationMessage(string message, string caption)
+        {
+            MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public void ShowErrorMessage(Exception ex)
+        {
+            MessageBox.Show($@"{ex.Message}/n/n{ex.StackTrace}", Resources.ErrorMessageBoxCaption, MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+        }
+
+        #endregion
     }
 }

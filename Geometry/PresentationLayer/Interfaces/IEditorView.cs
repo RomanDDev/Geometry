@@ -5,10 +5,8 @@ namespace Geometry.PresentationLayer.Interfaces
     /// <summary>
     /// Main interface of winforms view
     /// </summary>
-    public interface IEditorView: IEditorModesView, IInputView
+    public interface IEditorView: IEditorModesView, IInputView, IMessenger
     {
-        void Show();
-        void Close();
         event PaintEventHandler Paint;
         void Invalidate();
     }
