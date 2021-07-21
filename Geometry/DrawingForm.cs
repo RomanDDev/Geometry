@@ -7,6 +7,9 @@ using Geometry.Properties;
 
 namespace Geometry
 {
+    /// <summary>
+    /// The main editor view
+    /// </summary>
     public partial class DrawingForm : Form, IEditorView
     {
         public DrawingForm()
@@ -19,6 +22,7 @@ namespace Geometry
         public event EventHandler<EditorModeChangedEventArgs> OnEditorModeChanged;
         public event EventHandler<BrushShapeChangedEventArgs> OnEditorBrushShapeChanged;
 
+        ///<inheritdoc />
         public void SetMode(EditorModes mode)
         {
             switch (mode)
@@ -37,6 +41,8 @@ namespace Geometry
             }
         }
         #endregion
+
+        #region Editor tool changed event handling
 
         private void SelectButton_CheckedChanged(object sender, EventArgs e)
         {
@@ -61,6 +67,10 @@ namespace Geometry
             OnEditorModeChanged?.Invoke(this, new EditorModeChangedEventArgs(EditorModes.Movement));
         }
 
+        #endregion
+
+        #region Brush shape changed event handling
+
         private void QuadrangleRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             OnEditorBrushShapeChanged?.Invoke(this, new BrushShapeChangedEventArgs(BrushShapes.Quadrangle));
@@ -80,5 +90,7 @@ namespace Geometry
         {
             OnEditorBrushShapeChanged?.Invoke(this, new BrushShapeChangedEventArgs(BrushShapes.Rhombus));
         }
+
+        #endregion
     }
 }

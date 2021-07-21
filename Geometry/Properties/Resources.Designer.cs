@@ -139,6 +139,15 @@ namespace Geometry.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You need to select the brush shape in order to draw shapes.
+        /// </summary>
+        internal static string SelectBrushShapeToDraw {
+            get {
+                return ResourceManager.GetString("SelectBrushShapeToDraw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap triangle {

@@ -24,7 +24,7 @@ namespace Geometry
             Application.SetCompatibleTextRenderingDefault(false);
             var shapeRepository = new ShapesRepository();
             var form = new DrawingForm();
-            var drawingPresenter = new DrawingPresenter(form, shapeRepository, CreateToolDictionary(shapeRepository));
+            using var drawingPresenter = new DrawingPresenter(form, shapeRepository, CreateToolDictionary(shapeRepository));
             Application.Run(form);
         }
 

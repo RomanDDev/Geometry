@@ -11,6 +11,9 @@ namespace Geometry.ApplicationLayer.Interfaces
         void HandleMouseDown(MouseEventArgs args);
         void HandleMouseMove(MouseEventArgs args);
         void HandleKeyPress(KeyPressEventArgs args);
+        /// <summary>
+        /// Resets the editor tool to the defaults
+        /// </summary>
         void Reset();
     }
 }

@@ -4,7 +4,7 @@ using Geometry.DomainLayer.Models.BaseShapes;
 namespace Geometry.DomainLayer.Interfaces
 {
     /// <summary>
-    /// Container interface of current editing geometry shapes
+    /// Container interface of current editor geometry shapes
     /// </summary>
     public interface IShapeRepository
     {

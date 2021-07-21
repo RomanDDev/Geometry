@@ -4,19 +4,32 @@ using System.Linq;
 
 namespace Geometry.DomainLayer.Models.Shapes
 {
+    /// <summary>
+    /// Represents the rhombus shape
+    /// </summary>
     public class Rhombus : Quadrangle
     {
+        /// <summary>
+        /// The collection of points, defining the rhombus shape
+        /// </summary>
         private readonly List<Point> _points;
 
-        public Rhombus(int zIndex, Color backColor, Color borderColor, Rectangle rectangle) : base(zIndex, backColor,
-            borderColor, rectangle)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="zIndex">Z coordinate of the shape</param>
+        /// <param name="backColor"></param>
+        /// <param name="borderColor"></param>
+        /// <param name="containerRectangle">The rectangle in which the rhombus is inscribed</param>
+        public Rhombus(int zIndex, Color backColor, Color borderColor, Rectangle containerRectangle) : base(zIndex, backColor,
+            borderColor, containerRectangle)
         {
             _points = new Point[4]
             {
-                new Point(ContainerRectangle.Left, ContainerRectangle.Top + ContainerRectangle.Height / 2),
-                new Point(ContainerRectangle.Left + ContainerRectangle.Width / 2, ContainerRectangle.Top),
-                new Point(ContainerRectangle.Right, ContainerRectangle.Top + ContainerRectangle.Height / 2),
-                new Point(ContainerRectangle.Left + ContainerRectangle.Width / 2, ContainerRectangle.Bottom)
+                new Point(containerRectangle.Left, containerRectangle.Top + containerRectangle.Height / 2),
+                new Point(containerRectangle.Left + containerRectangle.Width / 2, containerRectangle.Top),
+                new Point(containerRectangle.Right, containerRectangle.Top + containerRectangle.Height / 2),
+                new Point(containerRectangle.Left + containerRectangle.Width / 2, containerRectangle.Bottom)
             }.ToList();
         }
 

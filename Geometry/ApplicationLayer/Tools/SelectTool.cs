@@ -13,6 +13,8 @@ namespace Geometry.ApplicationLayer.Tools
         {
         }
 
+        #region Input event handlers
+
         protected override void HandleMouseUp(Rectangle selectionRectangle)
         {
             foreach (var geometryShape in ShapeRepository.GetAllShapes().Where(shape => shape.IntersectsRectangle(selectionRectangle)))
@@ -24,5 +26,7 @@ namespace Geometry.ApplicationLayer.Tools
             foreach (var geometryShape in ShapeRepository.GetAllShapes())
                 geometryShape.Deselect();
         }
+
+        #endregion
     }
 }

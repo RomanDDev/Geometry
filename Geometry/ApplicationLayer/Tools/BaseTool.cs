@@ -6,6 +6,9 @@ using Geometry.DomainLayer.Interfaces;
 
 namespace Geometry.ApplicationLayer.Tools
 {
+    /// <summary>
+    /// Base abstract class of the editor tool
+    /// </summary>
     public abstract class BaseTool : IEditorTool
     {
         private Point? _startMousePoint;
@@ -15,6 +18,8 @@ namespace Geometry.ApplicationLayer.Tools
         {
             ShapeRepository = repository;
         }
+
+        #region Input events handlers
 
         public void HandleMouseUp(MouseEventArgs args)
         {
@@ -51,6 +56,8 @@ namespace Geometry.ApplicationLayer.Tools
         {
             throw new NotImplementedException();
         }
+
+        #endregion
 
         public void Reset()
         {

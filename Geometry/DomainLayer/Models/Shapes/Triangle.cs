@@ -5,17 +5,31 @@ using Geometry.DomainLayer.Models.BaseShapes;
 
 namespace Geometry.DomainLayer.Models.Shapes
 {
+    /// <summary>
+    /// Represents the triangle shape
+    /// </summary>
     public class Triangle: InteractiveShape
     {
+
+        /// <summary>
+        /// The collection of points, defining the triangle shape
+        /// </summary>
         private readonly List<Point> _points;
 
-        public Triangle(int zIndex, Color backColor, Color borderColor, Rectangle rectangle) : base(zIndex, backColor, borderColor, rectangle)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="zIndex">Z coordinate of the shape</param>
+        /// <param name="backColor"></param>
+        /// <param name="borderColor"></param>
+        /// <param name="containerRectangle">The rectangle in which the triangle is inscribed</param>
+        public Triangle(int zIndex, Color backColor, Color borderColor, Rectangle containerRectangle) : base(zIndex, backColor, borderColor, containerRectangle)
         {
             _points = new Point[3]
             {
-                new Point(ContainerRectangle.Left, ContainerRectangle.Bottom),
-                new Point(ContainerRectangle.Right, ContainerRectangle.Bottom),
-                new Point(ContainerRectangle.Left + ContainerRectangle.Width / 2, ContainerRectangle.Top)
+                new Point(containerRectangle.Left, containerRectangle.Bottom),
+                new Point(containerRectangle.Right, containerRectangle.Bottom),
+                new Point(containerRectangle.Left + containerRectangle.Width / 2, containerRectangle.Top)
             }.ToList();
         }
 

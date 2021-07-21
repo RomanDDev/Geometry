@@ -17,7 +17,12 @@ namespace Geometry.ApplicationLayer.Tools
             BrushShape = BrushShapes.NoShape;
         }
 
+        /// <summary>
+        /// Current brush shape
+        /// </summary>
         public BrushShapes BrushShape { get; set; }
+
+        #region Input event handlers
 
         protected override void HandleMouseUp(Rectangle selectionRectangle)
         {
@@ -28,9 +33,9 @@ namespace Geometry.ApplicationLayer.Tools
             switch (BrushShape)
             {
                 case BrushShapes.NoShape:
-                    return;
+                    throw new InvalidOperationException(Properties.Resources.SelectBrushShapeToDraw);
                 case BrushShapes.Ellipse:
-                    shape = new Circle(zIndex, Color.White, Color.Black, selectionRectangle);
+                    shape = new Ellipse(zIndex, Color.White, Color.Black, selectionRectangle);
                     break;
                 case BrushShapes.Quadrangle:
                     shape = new Quadrangle(zIndex, Color.White, Color.Black, selectionRectangle);
@@ -52,5 +57,7 @@ namespace Geometry.ApplicationLayer.Tools
         {
             //Do nothing
         }
+
+        #endregion
     }
 }

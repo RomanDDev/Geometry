@@ -3,11 +3,17 @@ using System.Drawing;
 
 namespace Geometry.DomainLayer.Models.BaseShapes
 {
+    /// <summary>
+    /// Base abstract class of shape with interactive points
+    /// </summary>
     public abstract class InteractiveShape : GeometryShape
     {
         private const int InteractivePointWightAndHeight = 5;
         private static readonly Color PointFillColor = Color.Red;
 
+        /// <summary>
+        /// Point that user can interact with
+        /// </summary>
         protected IEnumerable<Point> InteractivePoints { get; set; }
 
         protected InteractiveShape(int zIndex, Color backColor, Color borderColor, Rectangle containerRectangle) : base(
@@ -20,6 +26,7 @@ namespace Geometry.DomainLayer.Models.BaseShapes
             base.Move(dx, dy);
         }
 
+        /// <inheritdoc/>
         protected sealed override void DrawInteractivePoints(Graphics graphics)
         {
             UpdateInteractivePoints();
@@ -31,6 +38,10 @@ namespace Geometry.DomainLayer.Models.BaseShapes
             }
         }
 
+        /// <summary>
+        /// Update the interactive points
+        /// </summary>
+        //TODO: Pass the points collection as the method parameter in order not to be confused which collection must be updated
         protected abstract void UpdateInteractivePoints();
 
     }

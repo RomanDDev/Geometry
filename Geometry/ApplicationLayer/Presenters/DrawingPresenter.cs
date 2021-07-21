@@ -11,6 +11,9 @@ using Geometry.PresentationLayer.Interfaces;
 
 namespace Geometry.ApplicationLayer.Presenters
 {
+    /// <summary>
+    /// Main editor view presenter
+    /// </summary>
     public class DrawingPresenter: IDisposable
     {
         private IEditorTool _currentTool;
@@ -18,6 +21,12 @@ namespace Geometry.ApplicationLayer.Presenters
         private readonly IShapeRepository _shapesRepository;
         private readonly Dictionary<EditorModes, IEditorTool> _toolDictionary;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="view">View interface</param>
+        /// <param name="shapesRepository">Repository of created editor shapes</param>
+        /// <param name="toolDictionary">Dictionary of available editor tools</param>
         public DrawingPresenter(IEditorView view, IShapeRepository shapesRepository, Dictionary<EditorModes, IEditorTool> toolDictionary)
         {
             _view = view;
@@ -63,7 +72,7 @@ namespace Geometry.ApplicationLayer.Presenters
             _view.Paint -= View_Paint;
         }
 
-        //Passing view input events to current editor tool to handle
+        //Passing view input events to current editor tool handler
         private void ViewOnKeyPress(object sender, KeyPressEventArgs e)
         {
             _currentTool?.HandleKeyPress(e);
@@ -106,6 +115,11 @@ namespace Geometry.ApplicationLayer.Presenters
             UpdateCurrentTool(_toolDictionary[e.Mode]);
         }
 
+        /// <summary>
+        /// Handler of brush shape changed event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ViewOnOnEditorBrushShapeChanged(object sender, BrushShapeChangedEventArgs e)
         {
             if (!(_currentTool is DrawTool tool))
